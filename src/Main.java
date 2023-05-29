@@ -128,7 +128,7 @@ public class Main {
     }
 
     //Client Options
-    public static void clientOptions(Scanner sc, ArrayList<Floor> floors, Client c) {
+    public static void clientOptions(Scanner sc, ArrayList<Floor> floors, Client c) throws Exception {
         System.out.println("Options!");
         System.out.println("Enter 1:Reserve A Room" +
                 "\nEnter 2: Search For A Room" +
@@ -154,6 +154,7 @@ public class Main {
                     searchBetweenRoomsPrice(sc, floors);
                     break;
             }
+            Streams.fileWriterFloorAndRoom(floors);
             System.out.println("Enter 1:Reserve A Room" +
                     "\nEnter 2: Search For A Room" +
                     "\nEnter 3: Search For Rooms In A Specific Range By Area" +

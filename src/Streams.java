@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Streams {
     private static File clientFile = new File("/F:/Clients.txt");
     private static File employeeFile = new File("/F:/Employees.txt");
-    private static File floorFile = new File("/F:/floorsANDrooms.txt");
+    private static File floorFile = new File("/F:/Rooms.txt");
 
     private static FileInputStream reader;
     private static ObjectInputStream readerStream;
