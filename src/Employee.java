@@ -10,8 +10,12 @@ public class Employee extends Person implements java.io.Serializable {
     //Change Description
     public void changeDescription(ArrayList<Floor> floors, int floorNumber, int roomNumber, String description) {
         for (Floor x : floors) {
-            if(floorNumber == x.getFloorNumber()) {
-               x.rooms.get(roomNumber - 1).setDescription(description);
+            for (int i = 0; i < x.rooms.size(); i++) {
+                if (floorNumber == x.getFloorNumber() && x.getRooms().get(i).getRoomNumber() == roomNumber) {
+                    x.rooms.get(i).setDescription(description);
+                    break;
+
+                }
             }
         }
     }
@@ -21,6 +25,7 @@ public class Employee extends Person implements java.io.Serializable {
         for (Client client : clients) {
             if (client.getUsername().startsWith(clientName))
                 client.display();
+            break;
         }
 
     }

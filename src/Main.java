@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.ArrayList;
 
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
@@ -134,6 +135,7 @@ public class Main {
                 "\nEnter 2: Search For A Room" +
                 "\nEnter 3: Search For Rooms In A Specific Range By Area" +
                 "\nEnter 4: Search For Rooms In A Specific Range By Price" +
+                "\nEnter 5: Compare Between Rooms"+
                 "\nEnter 0: To Exit");
         int options = sc.nextInt();
         while (options != 0) {
@@ -152,6 +154,8 @@ public class Main {
                     break;
                 case 4:
                     searchBetweenRoomsPrice(sc, floors);
+                case 5:
+                    compareRoomsByPrice(sc, floors, c);
                     break;
             }
             Streams.fileWriterFloorAndRoom(floors);
@@ -159,6 +163,7 @@ public class Main {
                     "\nEnter 2: Search For A Room" +
                     "\nEnter 3: Search For Rooms In A Specific Range By Area" +
                     "\nEnter 4: Search For Rooms In A Specific Range By Price" +
+                    "\nEnter 5: To Compare Between Rooms"+
                     "\nEnter 0: To Exit");
             options = sc.nextInt();
         }
@@ -223,7 +228,8 @@ public class Main {
                 //Search For Rooms In A Specific Range By Area
                 case 5:
                     searchBetweenRoomsArea(sc, floors);
-                    //Search For Rooms In A Specific Range By Price
+                    break;
+                //Search For Rooms In A Specific Range By Price
                 case 6:
                     searchBetweenRoomsPrice(sc, floors);
                     break;
@@ -235,6 +241,7 @@ public class Main {
                     "\nEnter 5 Search For Rooms In A Specific Range By Area" +
                     "\nEnter 6 Search For Rooms In A Specific Range By Price" +
                     "\nEnter 0: Exit");
+
             options = sc.nextInt();
         }
     }
@@ -252,6 +259,7 @@ public class Main {
             double area = sc.nextDouble();
             System.out.println("Enter The Description Of The Room!");
             String description = sc.next();
+
             e.createRoom(floors, floorNumber, roomNumber, price, area, description);
         } catch (InputMismatchException x) {
             System.out.println("Wrong Input Type!");
@@ -347,5 +355,17 @@ public class Main {
         } catch (NullPointerException e) {
             System.out.println("The Floor Or Room Doesn't Exist!");
         }
+    }
+
+    public static void compareRoomsByPrice(Scanner sc, ArrayList<Floor> floors, Client c) {
+        System.out.println("Enter First Floor Number");
+        int floorNumber1 = sc.nextInt();
+        System.out.println("Enter First Room Number");
+        int roomNumber1 = sc.nextInt();
+        System.out.println("Enter The Second Floor Number");
+        int floorNumber2 = sc.nextInt();
+        System.out.println("Enter The Second Room Number");
+        int roomNumber2 = sc.nextInt();
+        System.out.println(c.compareBetweenRoomsPrice(floors, floorNumber1, roomNumber1, floorNumber2, roomNumber2));
     }
 }

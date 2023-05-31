@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Room implements java.io.Serializable {
@@ -70,6 +71,7 @@ public class Room implements java.io.Serializable {
                     "\nRoom Number : " + roomNumber +
                     "\nRoom Status : " + reservationStatus +
                     "\nDescription : " + description +
+                    "\nPrice : " + price +
                     "\nArea : " + area + "\n\n");
         } else {
 
@@ -77,6 +79,8 @@ public class Room implements java.io.Serializable {
                     "\nRoom Number : " + roomNumber +
                     "\nRoom Status : " + reservationStatus +
                     "\nDescription : " + description +
+                    "\nPrice : " + price +
+                    "\nArea : " + area +
                     "\nClient Name : " + client.getUsername() + "\n\n");
         }
     }
@@ -84,38 +88,42 @@ public class Room implements java.io.Serializable {
     //Search For A Specific Room
     public static void searchBetweenRooms(ArrayList<Floor> f, int floorNumber1, int roomNumber1) {
         for (Floor x : f) {
-            if (floorNumber1 == x.getFloorNumber()) {
-                x.rooms.get(roomNumber1 - 1).displayRoom(floorNumber1);
-                break;
+            for (int i = 0; i < x.rooms.size(); i++) {
+                if (floorNumber1 == x.getFloorNumber() && x.rooms.get(i).getRoomNumber() == roomNumber1) {
+                    x.rooms.get(i).displayRoom(floorNumber1);
+                    break;
+                }
             }
         }
     }
 
     //Search Between A Range Of Area
-    public static void searchBetweenRoomsArea(double min, double max, ArrayList<Floor> f) {
+    public static void searchBetweenRoomsArea(double min, double max, ArrayList<Floor> floors) {
         max = Math.max(min, max);
         min = Math.min(min, max);
-        for (int i = 0; i < f.size(); i++) {
-            for (int j = 0; j < f.get(i).rooms.size(); j++) {
-                if (f.get(i).rooms.get(j).getArea() >= min && f.get(i).rooms.get(j).getArea() <= max) {
-                    f.get(i).rooms.get(j).displayRoom(f.get(j).getFloorNumber());
-                    System.out.println("\n\n");
+        for (Floor x : floors) {
+            for (int i = 0; i < x.rooms.size(); i++) {
+                if (x.rooms.get(i).getArea() >= min && x.rooms.get(i).getArea() <= max) {
+                    x.rooms.get(i).displayRoom(x.getFloorNumber());
                 }
             }
         }
     }
 
+
+
     //Search Between A Range Of Price
-    public static void searchBetweenRoomsPrice(double min, double max, ArrayList<Floor> f) {
+    public static void searchBetweenRoomsPrice(double min, double max, ArrayList<Floor> floors) {
         max = Math.max(min, max);
         min = Math.min(min, max);
-        for (int i = 0; i < f.size(); i++) {
-            for (int j = 0; j < f.get(i).rooms.size(); j++) {
-                if (f.get(i).rooms.get(j).getPrice() >= min && f.get(i).rooms.get(j).getPrice() <= max) {
-                    f.get(i).rooms.get(j).displayRoom(f.get(j).getFloorNumber());
-                    System.out.println("\n\n");
+        for (Floor x : floors) {
+            for (int i = 0; i < x.rooms.size(); i++) {
+                if (x.rooms.get(i).getPrice() >= min && x.rooms.get(i).getPrice() <= max) {
+                    x.rooms.get(i).displayRoom(x.getFloorNumber());
                 }
             }
         }
     }
+
+
 }
